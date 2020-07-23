@@ -1,0 +1,87 @@
+#%RAML 1.0
+title: Recruitment API
+version: v1
+types:
+  name:
+    type: object
+    properties:
+      first: string
+      last: string
+  contact:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - personalPhone
+          - email
+      value: string
+  student:
+    type: object
+    properties:
+      name: name
+      college: string
+      contact:
+        required: false
+        type: array
+        items: contact
+  recruitmentEvent:
+    type: object
+    properties:
+      date: datetime
+      supervisor:
+        type: object
+        properties:
+          name: name
+      prospects:
+        type: array
+        items: student
+/recruitment-events:
+  post:
+    body:
+      application/json:
+        type: recruitmentEvent
+        example: |
+          {
+            "date": "2020-07-23T16:04:17.849Z",
+            "supervisor": {
+              "name": {
+                "first": "Recruiter",
+                "last": "McRecruiterFace"
+              }
+            },
+            "prospects": [
+              {
+                "name": {
+                  "first": "Student 0",
+                  "last": "McStudentFace 0"
+                },
+                "college": "fine arts"
+              },
+              {
+                "name": {
+                  "first": "Student 1",
+                  "last": "McStudentFace 1"
+                },
+                "college": "engineering",
+                "contact": [
+                  {
+                    "type": "personalPhone",
+                    "value": "1234567890"
+                  },
+                  {
+                    "type": "email",
+                    "value": "student1@demos.r.us.com"
+                  }
+                ]
+              }
+            ]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "thank you!"
+              }

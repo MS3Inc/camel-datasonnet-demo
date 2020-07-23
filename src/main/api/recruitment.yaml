@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Recruitment API
+  version: v1
+paths:
+  /recruitment-events:
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                example: |
+                  {
+                    "message": "thank you!""
+                  }
+      operationId: POST_recruitment-events
+      requestBody:
+        content:
+          application/json:
+            example: |
+              {
+                "date": "2020-07-23T16:04:17.849Z",
+                "supervisor": {
+                  "name": {
+                    "first": "Recruiter",
+                    "last": "McRecruiterFace"
+                  }
+                },
+                "prospects": [
+                  {
+                    "name": {
+                      "first": "Student 0",
+                      "last": "McStudentFace 0"
+                    },
+                    "college": "fine arts"
+                  },
+                  {
+                    "name": {
+                      "first": "Student 1",
+                      "last": "McStudentFace 1"
+                    },
+                    "college": "engineering",
+                    "contact": [
+                      {
+                        "type": "personalPhone",
+                        "value": "1234567890"
+                      },
+                      {
+                        "type": "email",
+                        "value": "student1@demos.r.us.com"
+                      }
+                    ]
+                  }
+                ]
+              }
+            schema:
+              $ref: '#/components/schemas/recruitmentEvent'
+        required: true
+components:
+  schemas:
+    name:
+      type: object
+      properties:
+        first:
+          type: string
+        last:
+          type: string
+      required:
+        - first
+        - last
+    contact:
+      type: object
+      properties:
+        type:
+          enum:
+            - personalPhone
+            - email
+          type: string
+        value:
+          type: string
+      required:
+        - type
+        - value
+    student:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+        college:
+          type: string
+        contact:
+          type: array
+          items:
+            $ref: '#/components/schemas/contact'
+      required:
+        - name
+        - college
+    recruitmentEvent:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        supervisor:
+          type: object
+          properties:
+            name:
+              $ref: '#/components/schemas/name'
+          required:
+            - name
+        prospects:
+          type: array
+          items:
+            $ref: '#/components/schemas/student'
+      required:
+        - date
+        - supervisor
+        - prospects

@@ -94,6 +94,10 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-stream-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-undertow-starter</artifactId>
+    </dependency>
 
     <!-- Test -->
     <dependency>
@@ -135,6 +139,17 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-restdsl-openapi-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <specificationUri>${project.basedir}/src/main/api/recruitment.yaml</specificationUri>
+          <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+          <packageName>${project.groupId}.camel.recruitment</packageName>
+          <className>APIRouter</className>
+        </configuration>
       </plugin>
     </plugins>
   </build>

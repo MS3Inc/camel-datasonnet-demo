@@ -39,6 +39,31 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- overriding scala ver from camel -->
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.13.3</version>
+    </dependency>
+
+    <!-- overrides from custom camel build -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core-engine</artifactId>
+      <version>3.4.1-datasonnet</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-datasonnet</artifactId>
+      <version>3.4.1-datasonnet</version>
+    </dependency>
+
+    <!-- only needed if using XML DSL -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-spring</artifactId>
+      <version>3.4.1-datasonnet</version>
+    </dependency>
 
     <!-- Spring Boot -->
     <dependency>

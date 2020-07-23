@@ -117,6 +117,9 @@
       <resource>
         <directory>src/main/api</directory>
       </resource>
+      <resource>
+        <directory>src/main/datasonnet</directory>
+      </resource>
     </resources>
     <plugins>
       <plugin>

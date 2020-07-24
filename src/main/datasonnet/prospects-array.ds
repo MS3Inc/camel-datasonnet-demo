@@ -1,0 +1,15 @@
+local formatDate(date) = DS.ZonedDateTime.format(payload.date, 'yyyy-MM-dd\'T\'HH:mm:ss.SSSVV', 'MM/dd/yyyy');
+local concatNames(names) = DW.Core.joinBy(DW.Objects.valueSet(names), ' ');
+
+DW.Core.map(payload.prospects, function(student) {
+  date: formatDate(payload.date),
+  recruiter: concatNames(payload.supervisor.name),
+  name: concatNames(student.name),
+  college: student.college
+} + if ('contact' in student) then
+      DW.Core.reduce(student.contact, function(it, acc) (
+          acc + if (it.type == 'personalPhone') then { phone: it.value }
+          else { [it.type]: it.value}
+      ), {})
+    else { phone: null, email: null }
+)

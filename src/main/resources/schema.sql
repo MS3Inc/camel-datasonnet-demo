@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS prospects;
+
+CREATE TABLE prospects (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  date VARCHAR(250) NOT NULL,
+  name VARCHAR(250) NOT NULL,
+  college VARCHAR(250) NULL,
+  phone VARCHAR(250) NULL,
+  email VARCHAR(250) NULL,
+  recruiter VARCHAR(250) NOT NULL
+);
